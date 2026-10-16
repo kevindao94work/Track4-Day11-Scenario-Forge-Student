@@ -12,7 +12,19 @@ from .search import proposal_logpdf
 def wilson_ci(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
     """TODO 4. Wilson score interval for k successes in n trials. Must behave at k = 0 (lower bound 0,
     upper bound > 0) where the plain normal interval collapses to [0, 0]. Return (0, 1) for n = 0."""
-    raise NotImplementedError("TODO 4: wilson_ci")
+    if n == 0:
+        return 0.0, 1.0
+    if n < 0 or k < 0 or k > n:
+        raise ValueError("Wilson interval requires n > 0 and 0 <= k <= n")
+    if not math.isfinite(z) or z < 0:
+        raise ValueError("z must be a finite non-negative value")
+
+    p = k / n
+    z2 = z * z
+    d = 1.0 + z2 / n
+    center = (p + z2 / (2.0 * n)) / d
+    half = z * math.sqrt(p * (1.0 - p) / n + z2 / (4.0 * n * n)) / d
+    return max(0.0, center - half), min(1.0, center + half)
 
 
 def log_weights(Z, Bn, nat: space.Natural, prop: dict, beta: float = 0.2) -> np.ndarray:
