@@ -30,7 +30,28 @@ def min_ttc(R: core.Rollout, cap: float = 10.0) -> np.ndarray:
     Shapes: R.F is (K, NF, N, 7) with x, z, hx, hz, v, a, d; core.IX["ego"] is the ego's actor index.
     Vectorise over frames (a Python loop over 481 frames x K scenarios is too slow for Part C).
     """
-    raise NotImplementedError("TODO 1: min_ttc")
+    F = R.F
+    K, NF = F.shape[:2]
+    leaders = np.asarray(R.EGO[:, :, 3], dtype=int)
+    valid = (leaders >= 0) & (leaders < F.shape[2])
+    safe_leaders = np.where(valid, leaders, 0)
+    k_idx = np.arange(K)[:, None]
+    f_idx = np.arange(NF)[None, :]
+    ego = F[:, :, core.IX["ego"]]
+    lead = F[k_idx, f_idx, safe_leaders]
+
+    rx = lead[..., 0] - ego[..., 0]
+    rz = lead[..., 1] - ego[..., 1]
+    lon = rx * ego[..., 2] + rz * ego[..., 3]
+    gap = np.maximum(lon - HALF_EGO - np.where(core.PEDS[safe_leaders], 0.3, core.LEN[safe_leaders] / 2), 0.0)
+    closing = ego[..., 4] - lead[..., 4]
+    candidate = valid & (closing > 0.1)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        ttc = np.divide(gap, closing, out=np.full_like(gap, float(cap), dtype=float), where=candidate)
+    ttc = np.where(candidate, np.minimum(ttc, cap), cap)
+    result = np.min(ttc, axis=1)
+    crashed = np.fromiter((bool(ego_events(R, k)) for k in range(K)), dtype=bool, count=K)
+    return np.where(crashed, 0.0, result)
 
 
 def contact_type(R: core.Rollout, k: int, event: dict) -> str:
