@@ -35,7 +35,16 @@ def log_weights(Z, Bn, nat: space.Natural, prop: dict, beta: float = 0.2) -> np.
 
     nat.logpdf(Z, Bn) gives log p; proposal_logpdf(prop, Z, Bn) gives log of the CEM proposal.
     Use np.logaddexp so a weight of 1e-30 does not underflow to 0."""
-    raise NotImplementedError("TODO 6: log_weights")
+    if not 0.0 <= beta <= 1.0:
+        raise ValueError("beta must be in [0, 1]")
+    log_p = nat.logpdf(Z, Bn)
+    log_q_prop = proposal_logpdf(prop, Z, Bn)
+    if beta == 0.0:
+        return log_p - log_q_prop
+    if beta == 1.0:
+        return np.zeros_like(log_p)
+    log_q_mix = np.logaddexp(np.log1p(-beta) + log_q_prop, np.log(beta) + log_p)
+    return log_p - log_q_mix
 
 
 def is_estimate(logw: np.ndarray, y: np.ndarray, z: float = 1.96) -> dict:
