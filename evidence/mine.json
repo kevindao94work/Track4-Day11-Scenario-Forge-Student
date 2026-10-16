@@ -1,0 +1,270 @@
+{
+ "file": "hazard.json",
+ "hazards": [
+  {
+   "x": 210.0,
+   "lane": "E2",
+   "d": 1.2,
+   "v": 5.0,
+   "swerve": 3.8,
+   "swDur": 2.9,
+   "t0": 0.0,
+   "trig": 25.0,
+   "type": "bike"
+  }
+ ],
+ "space": {
+  "h0_x": [
+   195.0,
+   225.0
+  ],
+  "h0_d": [
+   1.0,
+   1.4
+  ],
+  "h0_v": [
+   4.0,
+   7.0
+  ],
+  "h0_swerve": [
+   3.3,
+   4.1
+  ],
+  "h0_swDur": [
+   2.7,
+   3.5
+  ],
+  "h0_t0": [
+   0.0,
+   2.0
+  ],
+  "h0_trig": [
+   10.0,
+   30.0
+  ]
+ },
+ "world": "town",
+ "exposure": 0.01,
+ "why": "Kịch bản xe đạp đi cùng chiều ở làn E2, lệch về mép phải rồi lạng vào phía làn E1 để tránh vật cản khi xe ta tiến đến. Dải x 195–225 m, lệch ngang 1.0–1.4 m, tốc độ 4–7 m/s, độ lạng 3.3–4.1 m trong 2.7–3.5 s, thời điểm 0–2 s và ngưỡng kích hoạt 10–30 m là dải kỹ thuật minh họa; gia tốc ngang cực đại trong dải không vượt 3 m/s². Exposure 0.01 nghĩa là giả định một tình huống như vậy trong 100 chuyến; đây là giả định kỹ thuật chưa được đo tại địa phương, không phải thống kê thực địa. Cần thay bằng video đếm xe đạp và đo quỹ đạo tại điểm dừng xe buýt trước khi dùng như tần suất thực tế.",
+ "exact": {
+  "planner": []
+ },
+ "infeasible": 10,
+ "accepted": 0.9933333333333333,
+ "conditional_on": "your town's traffic",
+ "baseline": {
+  "n": 1490,
+  "crashes": 5,
+  "avoidable": 0,
+  "unavoidable": 0,
+  "unattributed": 5,
+  "low_speed": 0,
+  "avoidable_foreknown": 0,
+  "overlap_at_start": 0,
+  "by_hazard": {
+   "unattributed": 5
+  },
+  "examples": [
+   {
+    "params": {
+     "cutT0": 10.52722906968871,
+     "cutDur": 3.6700836828802266,
+     "cutV": 16.474912419058175,
+     "cutDs": 5.479841758815308,
+     "pedT0": 9.028178608902548,
+     "pedV": 1.018300295933975,
+     "busGo": 16.140425828929512,
+     "tgT": 1.0708035216217002,
+     "cutGap": 5.089021699815291,
+     "pedGap": 6.876729115472134,
+     "mu": 0.8,
+     "pedLook": 1,
+     "cutBrake": 0.0,
+     "civil": true,
+     "h0_d": 1.3680737693104665,
+     "h0_swDur": 3.333780206091558,
+     "h0_swerve": 3.5885613912241845,
+     "h0_t0": 0.18034426407516269,
+     "h0_trig": 21.42638382283492,
+     "h0_v": 4.473578747646954,
+     "h0_x": 218.47673656597328
+    },
+    "kind": "unattributed",
+    "low_speed": false,
+    "other": "C2",
+    "t": 12.65,
+    "v_ego": 3.6047420501708984,
+    "fire_t": null,
+    "brake_t": null
+   },
+   {
+    "params": {
+     "cutT0": 10.830449840962446,
+     "cutDur": 2.9756342888423597,
+     "cutV": 15.99979160439862,
+     "cutDs": 6.071616864747856,
+     "pedT0": 15.874688526638067,
+     "pedV": 1.3828668865089626,
+     "busGo": 16.04673789630299,
+     "tgT": 1.1001648828612391,
+     "cutGap": 4.52545452287934,
+     "pedGap": 7.649467137695073,
+     "mu": 0.8,
+     "pedLook": 1,
+     "cutBrake": 0.0,
+     "civil": true,
+     "h0_d": 1.317125881239792,
+     "h0_swDur": 2.7346396998773286,
+     "h0_swerve": 3.8002120140631432,
+     "h0_t0": 1.4884760747084274,
+     "h0_trig": 24.718389442847496,
+     "h0_v": 4.755499765685917,
+     "h0_x": 216.96783767356584
+    },
+    "kind": "unattributed",
+    "low_speed": false,
+    "other": "C2",
+    "t": 12.65,
+    "v_ego": 3.6047420501708984,
+    "fire_t": null,
+    "brake_t": null
+   },
+   {
+    "params": {
+     "cutT0": 10.293989765607764,
+     "cutDur": 4.1795993156822195,
+     "cutV": 15.881814302750977,
+     "cutDs": 5.846418769946588,
+     "pedT0": 7.682280291293836,
+     "pedV": 1.4033427197041095,
+     "busGo": 21.95745007058202,
+     "tgT": 1.4739953344950871,
+     "cutGap": 5.3496415462294085,
+     "pedGap": 6.744437546239638,
+     "mu": 0.5,
+     "pedLook": 1,
+     "cutBrake": 0.0,
+     "civil": true,
+     "h0_d": 1.3361653691768574,
+     "h0_swDur": 3.482839013416057,
+     "h0_swerve": 3.642777757386192,
+     "h0_t0": 0.15549968553836968,
+     "h0_trig": 26.593709914075795,
+     "h0_v": 4.389367743690696,
+     "h0_x": 214.57179936897882
+    },
+    "kind": "unattributed",
+    "low_speed": false,
+    "other": "C2",
+    "t": 12.5,
+    "v_ego": 5.50656795501709,
+    "fire_t": null,
+    "brake_t": null
+   },
+   {
+    "params": {
+     "cutT0": 10.425686436084327,
+     "cutDur": 3.65101687048684,
+     "cutV": 15.641664786533285,
+     "cutDs": 5.685591002627842,
+     "pedT0": 13.08581949703341,
+     "pedV": 1.4264520517557875,
+     "busGo": 16.417611053756332,
+     "tgT": 1.4033132385715104,
+     "cutGap": 5.834830103488259,
+     "pedGap": 3.1724939982474636,
+     "mu": 0.5,
+     "pedLook": 1,
+     "cutBrake": 0.0,
+     "civil": true,
+     "h0_d": 1.2182329344982539,
+     "h0_swDur": 3.085698429582566,
+     "h0_swerve": 3.680119166951931,
+     "h0_t0": 0.03893197041100849,
+     "h0_trig": 14.907076655033961,
+     "h0_v": 5.308183733779356,
+     "h0_x": 196.51748913449433
+    },
+    "kind": "unattributed",
+    "low_speed": false,
+    "other": "C2",
+    "t": 12.5,
+    "v_ego": 5.263143539428711,
+    "fire_t": null,
+    "brake_t": null
+   },
+   {
+    "params": {
+     "cutT0": 10.136640250821621,
+     "cutDur": 4.583748786739916,
+     "cutV": 17.010283491315903,
+     "cutDs": 4.606043202336366,
+     "pedT0": 7.353244066004759,
+     "pedV": 1.3716262621369255,
+     "busGo": 18.474595759569635,
+     "tgT": 0.9626904974285081,
+     "cutGap": 6.760060927526277,
+     "pedGap": 3.170803442243204,
+     "mu": 0.5,
+     "pedLook": 1,
+     "cutBrake": 0.0,
+     "civil": true,
+     "h0_d": 1.0974975398096791,
+     "h0_swDur": 2.76496760085136,
+     "h0_swerve": 3.9596736831631207,
+     "h0_t0": 1.662235090831429,
+     "h0_trig": 21.327545958606834,
+     "h0_v": 4.2186231925583,
+     "h0_x": 216.68371803551528
+    },
+    "kind": "unattributed",
+    "low_speed": false,
+    "other": "C2",
+    "t": 12.6,
+    "v_ego": 4.8624420166015625,
+    "fire_t": null,
+    "brake_t": null
+   }
+  ],
+  "p": 0.0,
+  "lo": 0.0,
+  "hi": 0.0025716247291546835,
+  "per_trip": 0.0,
+  "per_trip_hi": 2.5716247291546834e-05
+ },
+ "chosen": {
+  "n": 1490,
+  "crashes": 0,
+  "avoidable": 0,
+  "unavoidable": 0,
+  "unattributed": 0,
+  "low_speed": 0,
+  "avoidable_foreknown": 0,
+  "overlap_at_start": 0,
+  "by_hazard": {},
+  "examples": [],
+  "p": 0.0,
+  "lo": 0.0,
+  "hi": 0.0025716247291546835,
+  "per_trip": 0.0,
+  "per_trip_hi": 2.5716247291546834e-05
+ },
+ "_run": {
+  "mssv": "2A202602793",
+  "town": "B",
+  "quick": false,
+  "step": "mine",
+  "salted": false,
+  "budgets": {
+   "replay_n": 400,
+   "mc_n": 3000,
+   "iters": 8,
+   "per_iter": 300,
+   "final_n": 600,
+   "seeds": 3,
+   "fix_n": 400,
+   "progress_n": 256,
+   "mine_n": 1500
+  }
+ }
+}

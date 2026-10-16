@@ -1,0 +1,66 @@
+{
+  "format": "avsim-studio/1",
+  "params": {
+    "cutT0": 6.5,
+    "cutDur": 2.4,
+    "cutV": 15,
+    "pedT0": 11,
+    "pedV": 1.45,
+    "busGo": 17,
+    "cutDs": -4,
+    "tgT": 0.9,
+    "mu": 0.8,
+    "cutGap": 12,
+    "cutBrake": 0,
+    "pedGap": 4.5,
+    "pedLook": 1,
+    "civil": true
+  },
+  "policy": {},
+  "hazards": [
+    {
+      "type": "bike",
+      "x": 210.0,
+      "lane": "E2",
+      "d": 1.2,
+      "v": 5.0,
+      "swerve": 3.8,
+      "swDur": 2.9,
+      "t0": 0.0,
+      "trig": 25.0
+    }
+  ],
+  "ego": "planner",
+  "space": {
+    "h0_x": [
+      195.0,
+      225.0
+    ],
+    "h0_d": [
+      1.0,
+      1.4
+    ],
+    "h0_v": [
+      4.0,
+      7.0
+    ],
+    "h0_swerve": [
+      3.3,
+      4.1
+    ],
+    "h0_swDur": [
+      2.7,
+      3.5
+    ],
+    "h0_t0": [
+      0.0,
+      2.0
+    ],
+    "h0_trig": [
+      10.0,
+      30.0
+    ]
+  },
+  "exposure": 0.01,
+  "why": "Kịch bản xe đạp đi cùng chiều ở làn E2, lệch về mép phải rồi lạng vào phía làn E1 để tránh vật cản khi xe ta tiến đến. Dải x 195–225 m, lệch ngang 1.0–1.4 m, tốc độ 4–7 m/s, độ lạng 3.3–4.1 m trong 2.7–3.5 s, thời điểm 0–2 s và ngưỡng kích hoạt 10–30 m là dải kỹ thuật minh họa; gia tốc ngang cực đại trong dải không vượt 3 m/s². Exposure 0.01 nghĩa là giả định một tình huống như vậy trong 100 chuyến; đây là giả định kỹ thuật chưa được đo tại địa phương, không phải thống kê thực địa. Cần thay bằng video đếm xe đạp và đo quỹ đạo tại điểm dừng xe buýt trước khi dùng như tần suất thực tế."
+}
