@@ -370,7 +370,7 @@
   "mssv": "2A202602793",
   "town": "B",
   "quick": false,
-  "step": "hunt",
+  "step": "all",
   "salted": false,
   "budgets": {
    "replay_n": 400,

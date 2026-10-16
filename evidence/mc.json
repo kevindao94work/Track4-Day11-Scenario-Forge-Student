@@ -36,12 +36,12 @@
   }
  },
  "infeasible": 16,
- "seconds": 22.70213294029236,
+ "seconds": 22.60681700706482,
  "_run": {
   "mssv": "2A202602793",
   "town": "B",
   "quick": false,
-  "step": "mc",
+  "step": "all",
   "salted": false,
   "budgets": {
    "replay_n": 400,

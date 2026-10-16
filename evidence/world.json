@@ -13,12 +13,12 @@
   }
  ],
  "progress_default": 188.95529174804688,
- "seconds": 2.399195909500122,
+ "seconds": 2.438528060913086,
  "_run": {
   "mssv": "2A202602793",
   "town": "B",
   "quick": false,
-  "step": "world",
+  "step": "all",
   "salted": false,
   "budgets": {
    "replay_n": 400,

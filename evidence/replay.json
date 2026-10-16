@@ -442,7 +442,7 @@
   "mssv": "2A202602793",
   "town": "B",
   "quick": false,
-  "step": "replay",
+  "step": "all",
   "salted": false,
   "budgets": {
    "replay_n": 400,
