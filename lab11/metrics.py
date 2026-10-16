@@ -90,7 +90,16 @@ def contact_type(R: core.Rollout, k: int, event: dict) -> str:
 def progress_metrics(R: core.Rollout) -> tuple[np.ndarray, np.ndarray]:
     """TODO 9. Two (K,) arrays: the distance the ego covers in the 24 s (sum of frame-to-frame steps, metres),
     and the number of frames where the ego brakes harder than 3 m/s^2 (acceleration column < -3)."""
-    raise NotImplementedError("TODO 9: progress_metrics")
+    ego = R.F[:, :, core.IX["ego"]]
+    steps = np.hypot(np.diff(ego[..., 0], axis=1), np.diff(ego[..., 1], axis=1))
+    dist = np.empty(R.K, dtype=float)
+    harsh = np.empty(R.K, dtype=int)
+    for k in range(R.K):
+        events = ego_events(R, k)
+        end = min((int(e["f"]) for e in events), default=R.F.shape[1] - 1)
+        dist[k] = np.sum(steps[k, :end])
+        harsh[k] = int(np.count_nonzero(ego[k, :end + 1, 5] < -3.0))
+    return dist, harsh
 
 
 # ---------------------------------------------------------------- given helpers
