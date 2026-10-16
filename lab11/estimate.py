@@ -24,7 +24,9 @@ def wilson_ci(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
     d = 1.0 + z2 / n
     center = (p + z2 / (2.0 * n)) / d
     half = z * math.sqrt(p * (1.0 - p) / n + z2 / (4.0 * n * n)) / d
-    return max(0.0, center - half), min(1.0, center + half)
+    lo = 0.0 if k == 0 else max(0.0, center - half)
+    hi = 1.0 if k == n else min(1.0, center + half)
+    return lo, hi
 
 
 def log_weights(Z, Bn, nat: space.Natural, prop: dict, beta: float = 0.2) -> np.ndarray:
