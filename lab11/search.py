@@ -20,7 +20,23 @@ def cem_update(Z, Bn, score, prev: dict, rho: float = 0.1, smooth: float = 0.7, 
       level = the lowest score inside the elite (how dangerous the elite already is)
 
     Why the floors: a std that collapses to 0 or a probability of exactly 0/1 makes importance weights explode."""
-    raise NotImplementedError("TODO 5: cem_update")
+    Z = np.asarray(Z, dtype=float)
+    Bn = np.asarray(Bn, dtype=float)
+    score = np.asarray(score, dtype=float).reshape(-1)
+    n = len(score)
+    if Z.shape != (n, space.D) or Bn.shape != (n, space.B) or n == 0:
+        raise ValueError(f"expected Z (n, {space.D}), Bn (n, {space.B}), and non-empty scores")
+    if not 0.0 <= rho <= 1.0 or not 0.0 <= smooth <= 1.0 or min_std < 0.0:
+        raise ValueError("rho and smooth must be in [0, 1], and min_std must be non-negative")
+
+    elite_n = min(n, max(2, int(math.ceil(rho * n))))
+    elite_idx = np.argsort(-score, kind="stable")[:elite_n]
+    elite_z, elite_b, elite_score = Z[elite_idx], Bn[elite_idx], score[elite_idx]
+    mean = smooth * elite_z.mean(axis=0) + (1.0 - smooth) * np.asarray(prev["mean"])
+    std = np.maximum(min_std, smooth * elite_z.std(axis=0) + (1.0 - smooth) * np.asarray(prev["std"]))
+    p_bin = smooth * elite_b.mean(axis=0) + (1.0 - smooth) * np.asarray(prev["p_bin"])
+    p_bin = np.clip(p_bin, p_clip[0], p_clip[1])
+    return dict(mean=mean, std=std, p_bin=p_bin, level=float(np.min(elite_score)))
 
 
 # ---------------------------------------------------------------- given
