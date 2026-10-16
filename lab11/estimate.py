@@ -54,7 +54,30 @@ def is_estimate(logw: np.ndarray, y: np.ndarray, z: float = 1.96) -> dict:
     se = std(w * y, ddof=1) / sqrt(n); CI = [max(0, p - z se), p + z se];
     Kish effective sample size ess = (sum w)^2 / sum(w^2).
     Return dict(p=, lo=, hi=, se=, ess=, n=)."""
-    raise NotImplementedError("TODO 7: is_estimate")
+    logw = np.asarray(logw, dtype=float).reshape(-1)
+    y = np.asarray(y, dtype=float).reshape(-1)
+    if logw.shape != y.shape:
+        raise ValueError("logw and y must contain the same number of samples")
+    n = len(logw)
+    if n == 0:
+        return dict(p=0.0, lo=0.0, hi=0.0, se=0.0, ess=0.0, n=0)
+
+    with np.errstate(over="ignore", under="ignore", invalid="ignore"):
+        w = np.exp(logw)
+        wy = w * y
+        p = float(np.mean(wy))
+        se = float(np.std(wy, ddof=1) / math.sqrt(n)) if n > 1 else 0.0
+
+    max_logw = np.max(logw)
+    if np.isneginf(max_logw):
+        ess = 0.0
+    elif np.isposinf(max_logw):
+        n_inf = int(np.isposinf(logw).sum())
+        ess = float(n_inf)
+    else:
+        scaled_w = np.exp(logw - max_logw)
+        ess = float(np.sum(scaled_w) ** 2 / np.sum(scaled_w ** 2))
+    return dict(p=p, lo=max(0.0, p - z * se), hi=p + z * se, se=se, ess=ess, n=n)
 
 
 def rule_of_three(n_eff: float) -> float:
